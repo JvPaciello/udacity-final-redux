@@ -1,57 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import NavBar from "./components/NavBar/NavBar";
+import Dashboard from "./components/Dashboard/Dashboard";
+import AddPoll from "./components/AddPoll/AddPoll";
+import PollDetails from "./components/PollDetails/PollDetails";
+import Leaderboard from "./components/Leaderboard/Leaderboard";
+import Login from "./components/Login/Login";
+import NotFound from "./components/404";
+import PrivateRoute from "./components/PrivateRoute";
+import { fetchUsers } from "./actions/users";
+import { fetchQuestions } from "./actions/questions";
 
 function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(fetchUsers());
+    dispatch(fetchQuestions());
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
+        <Route path="/add" element={<PrivateRoute element={<AddPoll />} />} />
+        <Route path="/leaderboard" element={<PrivateRoute element={<Leaderboard />} />} />
+        <Route path="/questions/:question_id" element={<PrivateRoute element={<PollDetails />} />} />
+        <Route path="/404" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 

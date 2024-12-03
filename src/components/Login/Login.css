@@ -1,0 +1,22 @@
+.login-container {
+    text-align: center;
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+    margin-top: 16rem;
+    color: white;
+  }
+  
+  select {
+    margin: 20px 0;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  
+  
