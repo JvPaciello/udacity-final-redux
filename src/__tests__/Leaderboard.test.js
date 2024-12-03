@@ -1,9 +1,9 @@
+/* eslint-disable testing-library/await-async-query */
 import React from "react";
 import renderer from "react-test-renderer";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import Leaderboard from "../components/Leaderboard/Leaderboard";
-
 
 const mockStore = configureStore([]);
 const initialState = {
@@ -33,7 +33,7 @@ const initialState = {
   },
 };
 
-describe("Leaderboard Snapshot Test", () => {
+describe("Leaderboard Tests", () => {
   it("renders correctly with given state", () => {
     const store = mockStore(initialState);
 
@@ -45,5 +45,71 @@ describe("Leaderboard Snapshot Test", () => {
 
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  it("displays correct number of users in the leaderboard", () => {
+    const store = mockStore(initialState);
+
+    const component = renderer.create(
+      <Provider store={store}>
+        <Leaderboard />
+      </Provider>
+    );
+
+    const instance = component.root;
+    const rows = instance.findAllByType("tr"); 
+    expect(rows.length).toBe(3); 
+  });
+
+  it("orders users by total score descending", () => {
+    const store = mockStore(initialState);
+
+    const component = renderer.create(
+      <Provider store={store}>
+        <Leaderboard />
+      </Provider>
+    );
+
+    const instance = component.root;
+    const rows = instance.findAllByType("tr").slice(1); 
+    const scores = rows.map((row) => {
+      const scoreCell = row.findAllByType("td")[4]; 
+      return parseInt(scoreCell.children[0]);
+    });
+
+    expect(scores).toEqual(scores.sort((a, b) => b - a));
+  });
+
+  it("renders user details correctly", () => {
+    const store = mockStore(initialState);
+
+    const component = renderer.create(
+      <Provider store={store}>
+        <Leaderboard />
+      </Provider>
+    );
+
+    const instance = component.root;
+    const firstUserRow = instance.findAllByType("tr")[1]; 
+    const cells = firstUserRow.findAllByType("td");
+
+    expect(cells[1].children[0]).toBe("Sarah Edo"); 
+    expect(cells[2].children[0]).toBe("4");
+    expect(cells[3].children[0]).toBe("2"); 
+    expect(cells[4].children[0]).toBe("6"); 
+  });
+
+  it("handles an empty user list gracefully", () => {
+    const store = mockStore({ users: {} });
+
+    const component = renderer.create(
+      <Provider store={store}>
+        <Leaderboard />
+      </Provider>
+    );
+
+    const instance = component.root;
+    const rows = instance.findAllByType("tr");
+    expect(rows.length).toBe(1); 
   });
 });
