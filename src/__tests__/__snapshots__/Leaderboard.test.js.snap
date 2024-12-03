@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Leaderboard Snapshot Test renders correctly with given state 1`] = `
+<div
+  className="leaderboard"
+>
+  <h1>
+    Leaderboard
+  </h1>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Avatar
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Answered
+        </th>
+        <th>
+          Created
+        </th>
+        <th>
+          Score
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <img
+            alt="Avatar of Sarah Edo"
+            className="avatar"
+            src="https://austinmonthly.wppcdn.com/wp-content/uploads/2019/10/JackieVenson1.jpeg"
+          />
+        </td>
+        <td>
+          Sarah Edo
+        </td>
+        <td>
+          4
+        </td>
+        <td>
+          2
+        </td>
+        <td>
+          6
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img
+            alt="Avatar of Tyler McGinnis"
+            className="avatar"
+            src="https://blogs.correiobraziliense.com.br/trilhasonora/wp-content/uploads/sites/39/2020/10/CBNFOT081020100047-550x549.jpg"
+          />
+        </td>
+        <td>
+          Tyler McGinnis
+        </td>
+        <td>
+          2
+        </td>
+        <td>
+          2
+        </td>
+        <td>
+          4
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
