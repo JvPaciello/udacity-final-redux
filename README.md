@@ -29,3 +29,6 @@ The application is designed to demonstrate advanced state management and routing
    cd udacity-final-redux
    npm install
    npm start
+   
+2. To run the tests run:
+   npm run test
