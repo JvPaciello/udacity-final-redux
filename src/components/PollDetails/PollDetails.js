@@ -23,9 +23,14 @@ function PollDetails() {
     }
   }, [dispatch, question]);
 
+  // Redirect to login if authedUser is null
+  if (!authedUser) {
+    return <Navigate to="/login" />;
+  }
+
   // Show loading state while fetching
   if (loading) {
-    return <div>Loading...</div>;
+    return <div style={{ textAlign: 'center', marginTop: '50px', color: 'white'}}>Loading...</div>;
   }
 
   // Redirect to 404 if the question does not exist after loading
