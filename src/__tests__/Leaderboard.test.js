@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import Leaderboard from "../components/Leaderboard/Leaderboard";
@@ -32,22 +32,15 @@ const initialState = {
   },
 };
 
-describe("Leaderboard Interaction Test", () => {
-  it("simulates a click and verifies the interaction", () => {
+describe("Leaderboard Component", () => {
+  it("matches the snapshot", () => {
     const store = mockStore(initialState);
-
-    render(
+    const { asFragment } = render(
       <Provider store={store}>
         <Leaderboard />
       </Provider>
     );
 
-
-    const firstUser = screen.getByText("Sarah Edo");
-    fireEvent.click(firstUser);
-
-    expect(screen.getByText("Sarah Edo")).toBeInTheDocument();
-
-   
+    expect(asFragment()).toMatchSnapshot();
   });
 });
