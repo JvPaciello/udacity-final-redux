@@ -5,7 +5,6 @@ import "./Leaderboard.css";
 function Leaderboard() {
   const users = useSelector((state) => state.users);
 
-  // Calculate scores for each user
   const leaderboardData = Object.values(users)
     .map((user) => ({
       id: user.id,
@@ -15,7 +14,16 @@ function Leaderboard() {
       questionsAnswered: Object.keys(user.answers).length,
       totalScore: user.questions.length + Object.keys(user.answers).length,
     }))
-    .sort((a, b) => b.totalScore - a.totalScore); // Sort by total score descending
+    .sort((a, b) => b.totalScore - a.totalScore);
+
+  if (leaderboardData.length === 0) {
+    return (
+      <div className="leaderboard">
+        <h1>Leaderboard</h1>
+        <p>No data available</p>
+      </div>
+    );
+  }
 
   return (
     <div className="leaderboard">

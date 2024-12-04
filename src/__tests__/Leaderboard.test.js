@@ -106,4 +106,33 @@ describe("Leaderboard Component", () => {
     expect(getByAltText("Avatar of User One").src).toContain("avatar1.png");
     expect(getByAltText("Avatar of User Two").src).toContain("avatar2.png");
   });
+  it("renders the correct table headers", () => {
+    const store = mockStore(initialState);
+  
+    const { getByText } = render(
+      <Provider store={store}>
+        <Leaderboard />
+      </Provider>
+    );
+  
+    expect(getByText("Avatar")).toBeInTheDocument();
+    expect(getByText("Name")).toBeInTheDocument();
+    expect(getByText("Answered")).toBeInTheDocument();
+    expect(getByText("Created")).toBeInTheDocument();
+    expect(getByText("Score")).toBeInTheDocument();
+  });
+  
+  it("renders an empty state when no users are present", () => {
+    const store = mockStore({ users: {} });
+  
+    const { getByText } = render(
+      <Provider store={store}>
+        <Leaderboard />
+      </Provider>
+    );
+  
+    expect(getByText("Leaderboard")).toBeInTheDocument();
+    expect(getByText("No data available")).toBeInTheDocument();
+  });
+  
 });
