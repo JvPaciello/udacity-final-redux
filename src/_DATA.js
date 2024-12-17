@@ -3,7 +3,7 @@ let users = {
       id: 'sarahedo',
       password:'password123',
       name: 'Sarah Edo',
-      avatarURL: 'https://austinmonthly.wppcdn.com/wp-content/uploads/2019/10/JackieVenson1.jpeg',
+      avatarURL: 'https://i.scdn.co/image/ab6761610000e5ebb99cacf8acd5378206767261',
       answers: {
         "8xf0y6ziyjabvozdd253nd": 'optionOne',
         "6ni6ok3ym7mf1p33lnez": 'optionOne',
