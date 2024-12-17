@@ -44,7 +44,6 @@ function Dashboard() {
         </button>
       </div>
       <QuestionList
-        title={showAnswered ? "Answered questions" : "Unanswered questions"}
         questions={
           showAnswered
             ? sortedQuestions(answeredQuestions)
