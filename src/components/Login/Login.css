@@ -1,31 +1,79 @@
 .login-container {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    margin-top: 16rem;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    height: 73vh;
-    width: 100%;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #ffffff; 
+  border-radius: 15px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  padding: 30px; 
+  margin: 15rem auto 0; 
+  width: 400px; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+select {
+  margin: 20px 0;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+
+select:focus {
+  transform: scale(1.03); 
+  border: none;
+}
+
+/* Animação nas opções */
+@keyframes dropdown-fade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  select {
-    margin: 20px 0;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 10px;
-    border: none;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  button {
-    border-radius: 10px;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
+}
+
+select option {
+  font-size: 14px;
+  background-color: #ffffff;
+  color: #333;
+  animation: dropdown-fade 0.5s ease-in-out;
+}
+
+select:hover {
+  background-color: #e9ecef;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #ffffff;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  color: rgb(0, 0, 0);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #e2e5e7;
+  transform: scale(1.05);
+}
