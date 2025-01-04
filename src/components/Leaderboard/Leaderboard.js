@@ -39,21 +39,21 @@ function Leaderboard() {
           </tr>
         </thead>
         <tbody>
-          {leaderboardData.map((user) => (
-            <tr key={user.id}>
-              <td>
-                <img
-                  src={user.avatar}
-                  alt={`Avatar of ${user.name}`}
-                  className="avatar"
-                />
-              </td>
-              <td>{user.name}</td>
-              <td>{user.questionsAnswered}</td>
-              <td>{user.questionsAsked}</td>
-              <td>{user.totalScore}</td>
-            </tr>
-          ))}
+        {leaderboardData.map((user) => (
+    <tr key={user.id}>
+      <td data-label="">
+        <img
+          src={user.avatar}
+          alt={`Avatar of ${user.name}`}
+          className="avatar"
+        />
+      </td>
+      <td data-label="Name">{user.name}</td>
+      <td data-label="Answered">{user.questionsAnswered}</td>
+      <td data-label="Created">{user.questionsAsked}</td>
+      <td data-label="Score">{user.totalScore}</td>
+    </tr>
+  ))}
         </tbody>
       </table>
     </div>

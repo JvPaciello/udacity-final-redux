@@ -81,6 +81,7 @@ td:last-child {
   color: #000000;
 }
 
+/* Responsividade adicional */
 @media (max-width: 768px) {
   .leaderboard {
     padding: 10px;
@@ -89,14 +90,42 @@ td:last-child {
 
   table {
     font-size: 14px;
+    border: 0; /* Remove bordas para telas menores */
+  }
+
+  thead {
+    display: none; /* Oculta cabeçalho da tabela no mobile */
+  }
+
+  tr {
+    display: block;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Estilo de card */
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  td img.avatar {
+  display: block; 
+  margin: 0 auto; 
+  }
+
+  td::before {
+    content: attr(data-label); /* Adiciona rótulos nas células */
+    font-weight: bold;
+    color: #000;
+    margin-right: 10px;
   }
 
   .avatar {
     width: 60px;
     height: 60px;
   }
-
-  th, td {
-    padding: 8px;
-  }
 }
+
