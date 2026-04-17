@@ -6,7 +6,7 @@ import "./PollDetails.css";
 
 function PollDetails() {
   const { question_id } = useParams();
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   const questions = useSelector((state) => state.questions || {});
@@ -23,17 +23,18 @@ function PollDetails() {
     }
   }, [dispatch, question]);
 
-  // Redirect to login if authedUser is null
   if (!authedUser) {
     return <Navigate to="/login" />;
   }
 
-  // Show loading state while fetching
   if (loading) {
-    return <div style={{ textAlign: 'center', marginTop: '50px', color: 'white'}}>Loading...</div>;
+    return (
+      <div style={{ textAlign: "center", marginTop: "80px", color: "rgba(255,255,255,0.5)" }}>
+        Loading...
+      </div>
+    );
   }
 
-  // Redirect to 404 if the question does not exist after loading
   if (!question) {
     return <Navigate to="/404" />;
   }
@@ -54,24 +55,17 @@ function PollDetails() {
 
   const optionOneData = getOptionData("optionOne");
   const optionTwoData = getOptionData("optionTwo");
-
   const hasVoted = optionOneData.isSelected || optionTwoData.isSelected;
 
   const handleVote = (option) => {
     if (!hasVoted) {
-      dispatch(
-        saveQuestionAnswer({
-          authedUser,
-          qid: question_id,
-          answer: option,
-        })
-      );
+      dispatch(saveQuestionAnswer({ authedUser, qid: question_id, answer: option }));
     }
   };
 
   return (
     <div className="poll-details">
-      <h1>Would You Rather</h1>
+      <h1>Would You Rather?</h1>
       <div className="author">
         <img
           src={author.avatarURL}
@@ -85,17 +79,22 @@ function PollDetails() {
           <div
             key={index}
             className={`option ${option.isSelected ? "selected" : ""}`}
-            style={{ cursor: hasVoted ? "not-allowed" : "pointer" }}
+            style={{ cursor: hasVoted ? "default" : "pointer" }}
             onClick={() => handleVote(index === 0 ? "optionOne" : "optionTwo")}
           >
             <p>{option.text}</p>
             {hasVoted && (
-              <div>
-                <p>{option.votes} Votes</p>
-                <p>{option.percentage}%</p>
-              </div>
+              <>
+                <div className="vote-bar-bg">
+                  <div className="vote-bar" style={{ width: `${option.percentage}%` }} />
+                </div>
+                <div className="vote-stats">
+                  <span>{option.votes} {option.votes === 1 ? "vote" : "votes"}</span>
+                  <span>{option.percentage}%</span>
+                </div>
+              </>
             )}
-            {option.isSelected && <strong>Your Vote</strong>}
+            {option.isSelected && <span className="vote-badge">Your Vote</span>}
           </div>
         ))}
       </div>

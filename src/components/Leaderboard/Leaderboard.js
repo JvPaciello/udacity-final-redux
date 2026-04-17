@@ -31,6 +31,7 @@ function Leaderboard() {
       <table>
         <thead>
           <tr>
+            <th>#</th>
             <th>Avatar</th>
             <th>Name</th>
             <th>Answered</th>
@@ -39,21 +40,26 @@ function Leaderboard() {
           </tr>
         </thead>
         <tbody>
-        {leaderboardData.map((user) => (
-    <tr key={user.id}>
-      <td data-label="">
-        <img
-          src={user.avatar}
-          alt={`Avatar of ${user.name}`}
-          className="avatar"
-        />
-      </td>
-      <td data-label="Name">{user.name}</td>
-      <td data-label="Answered">{user.questionsAnswered}</td>
-      <td data-label="Created">{user.questionsAsked}</td>
-      <td data-label="Score">{user.totalScore}</td>
-    </tr>
-  ))}
+          {leaderboardData.map((user, index) => (
+            <tr key={user.id}>
+              <td data-label="#">
+                <span className={`rank-badge rank-${index + 1}`}>
+                  {index + 1}
+                </span>
+              </td>
+              <td data-label="">
+                <img
+                  src={user.avatar}
+                  alt={`Avatar of ${user.name}`}
+                  className="avatar"
+                />
+              </td>
+              <td data-label="Name">{user.name}</td>
+              <td data-label="Answered">{user.questionsAnswered}</td>
+              <td data-label="Created">{user.questionsAsked}</td>
+              <td data-label="Score" className="score-cell">{user.totalScore}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

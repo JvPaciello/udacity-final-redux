@@ -7,7 +7,7 @@ import "./AddPoll.css";
 function AddPoll() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const authedUser = useSelector((state) => state.authedUser); 
+  const authedUser = useSelector((state) => state.authedUser);
 
   const [optionOne, setOptionOne] = useState("");
   const [optionTwo, setOptionTwo] = useState("");
@@ -20,25 +20,24 @@ function AddPoll() {
       return;
     }
 
- 
     dispatch(
       handleAddQuestion({
         optionOneText: optionOne,
         optionTwoText: optionTwo,
-        author: authedUser, 
+        author: authedUser,
       })
     );
-
 
     navigate("/dashboard");
   };
 
   return (
     <div className="add-poll">
-      <h1 className="add-poll-title">Would You Rather</h1>
+      <h1 className="add-poll-title">New Poll</h1>
+      <p className="add-poll-subtitle">Create a "Would You Rather" question</p>
       <form className="add-poll-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="optionOne">Option One</label>
+          <label htmlFor="optionOne">Option A</label>
           <input
             type="text"
             id="optionOne"
@@ -47,8 +46,9 @@ function AddPoll() {
             placeholder="Enter the first option"
           />
         </div>
+        <div className="add-poll-vs">VS</div>
         <div className="form-group">
-          <label htmlFor="optionTwo">Option Two</label>
+          <label htmlFor="optionTwo">Option B</label>
           <input
             type="text"
             id="optionTwo"
@@ -58,7 +58,7 @@ function AddPoll() {
           />
         </div>
         <button type="submit" className="add-poll-submit">
-          Submit
+          Create Poll
         </button>
       </form>
     </div>
